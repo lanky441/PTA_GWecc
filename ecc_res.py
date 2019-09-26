@@ -57,21 +57,20 @@ def add_ecc_cgw(toa, psrra, psrdec, psrdist, gwra, gwdec, gwdist,
 		
 	res = (Fp * Sp) + (Fx * Sx)		#[s]
 	toas_new = toa + (res)/86400.		#[day]
-	return (res/86400., toas_new)
+	return (toas_new)
 	
 
 
 toas = np.linspace(0, 10*365.25, 100, dtype = np.longdouble)
 #toa_sample = np.linspace(np.min(toas), np.max(toas), int((np.max(toas) - np.min(toas))/86400))
 
-residual, toas_new = add_ecc_cgw(toas, 1.21, -0.825, .4, 2.33, 0.351, 1.e3, 4352752816.48062, 1, 1/(5*365.25*86400), 0.1, 0, 0, pi/6, 0)
+toas_new = add_ecc_cgw(toas, 1.21, -0.825, .4, 2.33, 0.351, 1.e3, 4352752816.48062, 1, 1/(5*365.25*86400), 0.1, 0, 0, pi/6, 0)
 
 end_time = time.time()
 print("Runtime =",end_time - start_time,"sec")
 
-res = toas_new - np.longdouble(toas)
-print('%.18f' % toas[-12], '%.18f' %toas_new[-12], '%.18f' %residual[-12], '%.18f' %res[-12])
+residual = toas_new - toas
+#print('%.18f' % toas[-12], '%.18f' %toas_new[-12], '%.18f' %residual[-12], '%.18f' %res[-12])
 
-plt.plot(toas/365.25, res)
 plt.plot(toas/365.25, residual)
 plt.show()

@@ -3,15 +3,12 @@ from numpy import pi, sin, cos
 from scipy.integrate import trapz
 import scipy.constants as sc
 import matplotlib.pyplot as plt
-#from decimal import *
 import time
 
 import antenna_pattern as ap
 import eccUtils as eu
 import waveform
 
-#np.set_printoptions(precision=30)
-#getcontext().prec = 30
 
 start_time = time.time()
 
